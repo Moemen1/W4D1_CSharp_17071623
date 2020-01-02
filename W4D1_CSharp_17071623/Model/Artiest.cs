@@ -9,7 +9,7 @@ namespace W4D1_CSharp_17071623.Model
         public int ArtiestId { get; set; }
         public string ArtiestNaam { get; set; }
 
-        public int InstrumentId { get; set; }
+        public int? InstrumentId { get; set; }
         public Instrument Instrument { get; set; }
 
         public int PopgroepId { get; set; }

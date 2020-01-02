@@ -9,13 +9,7 @@ namespace W4D1_CSharp_17071623
 {       
 
     class Program
-    {
-
-        /**
-         * 1. Laad Artiest met instrument en popgroep
-         * 2. Print op console
-         */
-       
+    {       
         static void Main(string[] args)
         {
             using (var context = new MyContext())
