@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using W4D1_CSharp_17071623;
+using W4D1_CSharp_17071623.Data;
 
 namespace W4D1_CSharp_17071623.Migrations
 {
