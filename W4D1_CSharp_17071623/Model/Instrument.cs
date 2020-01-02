@@ -9,6 +9,6 @@ namespace W4D1_CSharp_17071623.Model
         public int InstrumentId { get; set; }
         public string InstrumentNaam { get; set; }
 
-        public List<Artiest> Artiesten { get; set; }
+        public List<ArtiestInstrument> Artiesten { get; set; }
     }
 }

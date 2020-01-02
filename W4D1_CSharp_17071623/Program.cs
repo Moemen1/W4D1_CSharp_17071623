@@ -15,15 +15,15 @@ namespace W4D1_CSharp_17071623
             using (var context = new MyContext())
             {
                 
-                DbSeeder.SeedDatabase(context);
+                DbSeeder.SeedDatabase(context); 
 
                 //Queries.ShowArtiest(context);
                 //Queries.ShowPopgroep(context, "Popgroep1");
-                //Queries.ShowWieInstrumentSpeelt(context, "Gitaar");
-                //Queries.ShowGroteBands(context);
-                Queries.ShowBandsMetSaxofoonSpeler(context);
 
-                //Queries.Test(context);
+                //Queries.ShowWieInstrumentSpeelt(context, "Gitaar");
+
+                //Queries.ShowGroteBands(context);
+                //Queries.ShowBandsMetSaxofoonSpeler(context);     
             }
         }
     }

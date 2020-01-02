@@ -12,11 +12,16 @@ namespace W4D1_CSharp_17071623.Data
         public static void ShowArtiest(MyContext context)
         {
             foreach (Artiest a in context.Artiest
-                                         .Include(i => i.Instrument)
+                                         .Include(i => i.Instrumenten)
                                          .Include(p => p.Popgroep))
             {
-                Console.WriteLine(String.Format("Auteurnaam: {0} | Instrument: {1} | Popgroep: {2}  "
-                    , a.ArtiestNaam, a.Instrument.InstrumentNaam, a.Popgroep.PopgroepNaam));
+                Console.WriteLine(String.Format("Auteurnaam: {0} | Popgroep: {1}  "
+                    , a.ArtiestNaam, a.Popgroep.PopgroepNaam));
+
+                Console.WriteLine( a.ArtiestNaam + " Speelt de volgende instrumenten: ");
+
+                foreach(ArtiestInstrument i in a.Instrumenten)                
+                    Console.WriteLine(i + ", ");                
             }
         }
 
@@ -30,53 +35,39 @@ namespace W4D1_CSharp_17071623.Data
 
             foreach (Artiest a in band)
             {
-                if (a.Equals(band.Last())) // check laatste element
-                {
-                    Console.WriteLine(a.ArtiestNaam);
-                }
-                else
-                {
-                    Console.Write(a.ArtiestNaam + ", ");
-                }
+                if (a.Equals(band.Last())) // check laatste element                
+                    Console.WriteLine(a.ArtiestNaam);                
+                else                
+                    Console.Write(a.ArtiestNaam + ", ");                
             }
         }
 
         public static void ShowWieInstrumentSpeelt(MyContext context, string instrumentNaam)
         {
-            var spelers = context.Instrument
-                .Include(instrument => instrument.Artiesten)
-                    .ThenInclude(artiest => artiest.Popgroep)
-                .Where(i => i.InstrumentNaam == instrumentNaam)
-                .SelectMany(a => a.Artiesten)
-                .ToList();
+            var spelers = context.Artiest
+                .Where(artiest => artiest.Instrumenten
+                    .Any(instrument => instrument.Instrument.InstrumentNaam == instrumentNaam));
 
-            Console.Write("Het instrument " + instrumentNaam + " wordt door de volgende mensen gespeeld: ");
-
-            foreach (Artiest a in spelers)
+            foreach(Artiest a in spelers)
             {
-                if (a.Equals(spelers.Last()))
-                {
+                if(a.Equals(spelers.Last()))
                     Console.WriteLine(a.ArtiestNaam);
-                }
                 else
-                {
                     Console.Write(a.ArtiestNaam + ", ");
-                }
             }
         }
 
         public static void ShowBandsMetSaxofoonSpeler(MyContext context)
-        {
-            var ArtiestMetSaxofoon = context.Artiest
-                .Where(a => a.Instrument.InstrumentNaam == "Saxofoon")
-                .Select(b => b.Popgroep.PopgroepNaam).ToList();
-
-            foreach (string s in ArtiestMetSaxofoon)
-            {
-                Console.WriteLine(s);
-            }
-
-        }
+        {     
+            var ArtiestMetSaxofoon = context.Artiest         
+                .Where(a => a.Instrumenten
+                    .Any(i => i.Instrument.InstrumentNaam == "Saxofoon"));             
+            
+            foreach (Artiest s in ArtiestMetSaxofoon)
+            {             
+                Console.WriteLine(s.ArtiestNaam);
+            }                        
+        }       
 
         public static void ShowGroteBands(MyContext context)
         {
@@ -104,6 +95,5 @@ namespace W4D1_CSharp_17071623.Data
                 Console.WriteLine("--------------------------------");
             }
         }
-
     }
 }

@@ -7,10 +7,10 @@ using W4D1_CSharp_17071623.Model;
 namespace W4D1_CSharp_17071623.Data
 {
     public class DbSeeder
-    {
+    {        
         public static void SeedDatabase(MyContext context)
         {
-            if (context.Artiest.Any() || context.Popgroep.Any() || context.Instrument.Any())
+            if (context.Artiest.Any() || context.Popgroep.Any() || context.Instrument.Any() || context.ArtiestInstrument.Any())
             {
                 return;
             }
@@ -65,6 +65,26 @@ namespace W4D1_CSharp_17071623.Data
             foreach (Artiest a in Artiest)
             {
                 context.Artiest.Add(a);
+            }
+
+            context.SaveChanges();
+
+            var ArtiestInstrument = new ArtiestInstrument[]
+{
+                new ArtiestInstrument{ArtiestId = 1, InstrumentId = 1},
+                new ArtiestInstrument{ArtiestId = 2, InstrumentId = 2},
+                new ArtiestInstrument{ArtiestId = 3, InstrumentId = 3},
+                new ArtiestInstrument{ArtiestId = 4, InstrumentId = 4},
+                new ArtiestInstrument{ArtiestId = 5, InstrumentId = 2},
+                new ArtiestInstrument{ArtiestId = 6, InstrumentId = 1},
+                new ArtiestInstrument{ArtiestId = 7, InstrumentId = 4},
+                new ArtiestInstrument{ArtiestId = 8, InstrumentId = 3},
+                new ArtiestInstrument{ArtiestId = 9, InstrumentId = 4}
+};
+
+            foreach (ArtiestInstrument ai in ArtiestInstrument)
+            {
+                context.ArtiestInstrument.Add(ai);
             }
 
             context.SaveChanges();
